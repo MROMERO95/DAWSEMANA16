@@ -1,0 +1,85 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color:#d3d9d5;
+}
+
+header{
+    background:#120251;
+    color:white;
+    padding:40px;
+}
+
+.inicio{
+    background:#566ddb;
+    color:white;
+    padding:60px;
+}
+
+.card{
+    transition:0.4s;
+    box-shadow:0px 4px 10px rgba(0,0,0,0.2);
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+aside{
+    background:#d9ecff;
+    border-radius:10px;
+}
+
+footer{
+    background:#022c54;
+    color:white;
+    padding:20px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+section {
+    scroll-margin-top: 90px;
+}
+
+@media(max-width:768px){
+header h1{
+    font-size:28px;
+}
+.inicio{
+    padding:30px;
+}
+}
+
+/* ========================= */
+/* VALIDACIONES JS           */
+/* ========================= */
+
+/* Mensajes de error debajo de campos */
+.mensaje-error{
+    font-size: 13px;
+    color: #dc3545;
+    margin-top: 5px;
+}
+
+/* Campo válido */
+.is-valid{
+    border: 2px solid #198754 !important;
+}
+
+/* Campo inválido */
+.is-invalid{
+    border: 2px solid #dc3545 !important;
+}
+
+/* Mensaje general de éxito/error */
+.alert-success{
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.alert-danger{
+    padding: 10px;
+    border-radius: 5px;
+}

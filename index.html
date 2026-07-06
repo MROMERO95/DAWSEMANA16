@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -8,63 +10,7 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<style>
-
-body{
-    font-family: Arial, Helvetica, sans-serif;
-    background-color:#d3d9d5;
-}
-
-header{
-    background:#120251;
-    color:white;
-    padding:40px;
-}
-
-.inicio{
-    background:#566ddb;
-    color:white;
-    padding:60px;
-}
-
-.card{
-    transition:0.4s;
-    box-shadow:0px 4px 10px rgba(0,0,0,0.2);
-}
-
-.card:hover{
-    transform:translateY(-5px);
-}
-
-aside{
-    background:#d9ecff;
-    border-radius:10px;
-}
-
-footer{
-    background:#022c54;
-    color:white;
-    padding:20px;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-section {
-    scroll-margin-top: 90px;
-}
-
-@media(max-width:768px){
-header h1{
-    font-size:28px;
-}
-.inicio{
-    padding:30px;
-}
-}
-
-</style>
+<link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -76,31 +22,43 @@ header h1{
 </header>
 
 <!-- NAVBAR -->
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+
 <div class="container">
 
 <a class="navbar-brand" href="#">Parqueadero</a>
 
 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+
 <span class="navbar-toggler-icon"></span>
+
 </button>
 
 <div class="collapse navbar-collapse" id="menu">
 
 <ul class="navbar-nav ms-auto">
+
 <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+
 <li class="nav-item"><a class="nav-link" href="#quienes">Quiénes Somos</a></li>
+
 <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
+
 <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+
 </ul>
 
 </div>
+
 </div>
+
 </nav>
 
 <main class="container">
 
 <!-- INICIO -->
+
 <section id="inicio" class="inicio text-center rounded mt-4">
 
 <h2>Bienvenidos</h2>
@@ -109,16 +67,21 @@ header h1{
 
 <a href="#servicios" class="btn btn-warning">Ver Servicios</a>
 
-<!-- 🎥 VIDEO -->
 <div class="ratio ratio-16x9 mt-3">
-    <iframe src="https://www.youtube.com/embed/f_OVRZ-zc30"
-    title="Video del sistema de parqueadero"
-    allowfullscreen></iframe>
+
+<iframe
+src="https://www.youtube.com/embed/f_OVRZ-zc30"
+title="Video del sistema de parqueadero"
+allowfullscreen>
+
+</iframe>
+
 </div>
 
 </section>
 
-<!-- QUIÉNES SOMOS -->
+<!-- QUIENES SOMOS -->
+
 <section id="quienes" class="mt-5">
 
 <h2 class="text-center mb-4">Quiénes Somos</h2>
@@ -126,16 +89,24 @@ header h1{
 <div class="row align-items-center">
 
 <div class="col-md-6">
+
 <p>
+
 Sistema web para el control de vehículos en un
-parqueadero. Permite registrar información como placa, hora de entrada y salida, mejorando la
-organización y reduciendo errores. Además, facilita la gestión del tiempo de permanencia de los
-vehículos y optimiza el uso del espacio disponible.
+parqueadero. Permite registrar información como placa,
+hora de entrada y salida, mejorando la organización y
+reduciendo errores. Además, facilita la gestión del tiempo
+de permanencia de los vehículos y optimiza el uso del
+espacio disponible.
+
 </p>
+
 </div>
 
 <div class="col-md-6 text-center">
+
 <img src="img/carro.jpg" class="img-fluid rounded shadow" alt="Vehículo">
+
 </div>
 
 </div>
@@ -143,166 +114,251 @@ vehículos y optimiza el uso del espacio disponible.
 </section>
 
 <!-- SERVICIOS -->
+
 <section id="servicios" class="mt-5">
 
 <h2 class="text-center mb-4">Servicios</h2>
 
 <div class="row">
 
-    <!-- TARJETAS -->
-    <div class="col-md-4">
-        <div class="card p-3 m-3 text-center">
-            <h5>Registro de Vehículos</h5>
-            <p>Ingreso de información.</p>
-            <a href="#formRegistro" class="btn btn-primary">Registrar vehículo</a>
-        </div>
-    </div>
+<div class="col-md-4">
 
-    <div class="col-md-4">
-        <div class="card p-3 m-3 text-center">
-            <h5>Entradas y Salidas</h5>
-            <p>Control de accesos.</p>
-        </div>
-    </div>
+<div class="card p-3 m-3 text-center">
 
-    <div class="col-md-4">
-        <div class="card p-3 m-3 text-center">
-            <h5>Historial</h5>
-            <p>Registros guardados.</p>
-        </div>
-    </div>
+<h5>Registro de Vehículos</h5>
+
+<p>Ingreso de información.</p>
+
+<a href="#formRegistro" class="btn btn-primary">
+
+Registrar vehículo
+
+</a>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card p-3 m-3 text-center">
+
+<h5>Entradas y Salidas</h5>
+
+<p>Control de accesos.</p>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card p-3 m-3 text-center">
+
+<h5>Historial</h5>
+
+<p>Registros guardados.</p>
+
+</div>
+
+</div>
 
 </div>
 
 <hr class="my-5">
 
-<!-- FORMULARIO DINÁMICO  -->
-<h2 class="text-center mb-4">Registro de Vehículos</h2>
+<h2 class="text-center mb-4">
+
+Registro de Vehículos
+
+</h2>
 
 <div id="formRegistro" class="row">
 
-    <div class="col-md-5">
+<div class="col-md-5">
 
-        <form id="formulario">
+<form id="formulario" novalidate>
 
-            <input type="text" id="nombre" class="form-control mb-3" placeholder="Nombre del propietario">
+<input
+type="text"
+id="nombre"
+class="form-control"
+placeholder="Nombre del propietario">
 
-            <input type="text" id="descripcion" class="form-control mb-3" placeholder="Placa del vehículo">
+<div id="errorNombre" class="mensaje-error"></div>
 
-            <select id="categoria" class="form-select mb-3">
-                <option value="">Seleccione el tipo</option>
-                <option>Automóvil</option>
-                <option>Motocicleta</option>
-                <option>Camioneta</option>
-            </select>
 
-            <button type="submit" class="btn btn-success w-100">
-                Registrar Vehículo
-            </button>
+<input
+type="text"
+id="descripcion"
+class="form-control mt-3"
+placeholder="Placa del vehículo">
 
-        </form>
+<div id="errorDescripcion" class="mensaje-error"></div>
 
-        <div id="mensaje" class="mt-3"></div>
 
-    </div>
+<select
+id="categoria"
+class="form-select mt-3">
 
-    <div class="col-md-7">
+<option value="">Seleccione el tipo</option>
 
-        <h5>Total de registros: <span id="total">0</span></h5>
+<option>Automóvil</option>
 
-        <div id="listaRegistros"></div>
+<option>Motocicleta</option>
 
-    </div>
+<option>Camioneta</option>
+
+</select>
+
+<div id="errorCategoria" class="mensaje-error"></div>
+
+
+<button
+type="submit"
+class="btn btn-success w-100 mt-3">
+
+Registrar Vehículo
+
+</button>
+
+</form>
+
+<div id="mensaje" class="mt-3"></div>
 
 </div>
 
+<div class="col-md-7">
+
+<h5>
+
+Total de registros:
+
+<span id="total">0</span>
+
+</h5>
+
+<div id="listaRegistros"></div>
+
+</div>
+
+</div>
+
+</section>
+
 <!-- CONTACTO -->
+
 <section id="contacto" class="mt-5 mb-5">
 
-    <h2 class="text-center mb-4">Contacto</h2>
+<h2 class="text-center mb-4">
 
-    <div class="row">
+Contacto
 
-        <!-- FORMULARIO -->
-        <div class="col-md-6">
+</h2>
 
-            <h4>Escríbenos</h4>
+<div class="row">
 
-            <form>
-                <input type="text" class="form-control mb-3" placeholder="Nombre">
-                <input type="email" class="form-control mb-3" placeholder="Correo">
-                <textarea class="form-control mb-3" rows="5" placeholder="Mensaje"></textarea>
-                <button class="btn btn-success w-100">Enviar</button>
-            </form>
+<div class="col-md-6">
 
-        </div>
+<h4>Escríbenos</h4>
 
-        <!-- INFORMACIÓN FIJA -->
-        <div class="col-md-6">
+<form>
 
-            <h4>Información de contacto</h4>
+<input
+type="text"
+class="form-control mb-3"
+placeholder="Nombre">
 
-            <p><strong>Email:</strong> contacto@parqueadero.com</p>
-            <p><strong>Teléfono:</strong> +593 999 999 999</p>
-            <p><strong>Dirección:</strong> Ambato - Ecuador</p>
+<input
+type="email"
+class="form-control mb-3"
+placeholder="Correo">
 
-            <p>
-                <a href="#">Facebook</a> |
-                <a href="#">Instagram</a>
-            </p>
+<textarea
+class="form-control mb-3"
+rows="5"
+placeholder="Mensaje">
 
+</textarea>
 
-        </div>
+<button class="btn btn-success w-100">
 
-    </div>
+Enviar
 
-    <!-- ASIDE -->
-    <div class="row mt-4">
+</button>
 
-        <div class="col-md-12">
+</form>
 
-            <aside class="p-3">
+</div>
 
-                <h5>Información adicional</h5>
+<div class="col-md-6">
 
-                <p>Horario de atención:<br>
-                     Lunes a viernes<br>
-                    08:00 a 17:00.</p>
+<h4>Información de contacto</h4>
 
-            </aside>
+<p><strong>Email:</strong> contacto@parqueadero.com</p>
 
-        </div>
+<p><strong>Teléfono:</strong> +593 999 999 999</p>
 
-    </div>
+<p><strong>Dirección:</strong> Ambato - Ecuador</p>
+
+<p>
+
+<a href="#">Facebook</a> |
+
+<a href="#">Instagram</a>
+
+</p>
+
+</div>
+
+</div>
+
+<div class="row mt-4">
+
+<div class="col-md-12">
+
+<aside class="p-3">
+
+<h5>Información adicional</h5>
+
+<p>
+
+Horario de atención:
+
+<br>
+
+Lunes a viernes
+
+<br>
+
+08:00 a 17:00.
+
+</p>
+
+</aside>
+
+</div>
+
+</div>
 
 </section>
 
 </main>
 
 <footer class="text-center">
-<p>Ismenia Romero - 2026 - Desarrollo Web</p>
+
+<p>
+
+Ismenia Romero - 2026 - Desarrollo Web
+
+</p>
+
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script src="script.js"></script>
 
-<script>
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener("click", function(e) {
-        e.preventDefault();
-
-        const target = document.querySelector(this.getAttribute("href"));
-
-        const offset = 100; // ajusta esto según tu navbar
-        const position = target.offsetTop - offset;
-
-        window.scrollTo({
-            top: position,
-            behavior: "smooth"
-        });
-    });
-});
-</script>
-
 </body>
+
 </html>
