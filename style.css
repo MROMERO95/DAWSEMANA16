@@ -1,13 +1,44 @@
+/* =======================================================
+   SISTEMA DE REGISTRO DE VEHÍCULOS
+   Archivo: style.css
+   Preparado para futura integración con Flask
+======================================================= */
+
+/* =========================
+   ESTILOS GENERALES
+========================= */
+
 body{
     font-family: Arial, Helvetica, sans-serif;
     background-color:#d3d9d5;
+    margin:0;
+    padding:0;
+    line-height:1.6;
 }
+
+/* =========================
+   HEADER
+========================= */
 
 header{
     background:#120251;
     color:white;
     padding:40px;
+    text-align:center;
 }
+
+header h1{
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+header p{
+    margin:0;
+}
+
+/* =========================
+   SECCIÓN INICIO
+========================= */
 
 .inicio{
     background:#566ddb;
@@ -15,71 +46,202 @@ header{
     padding:60px;
 }
 
+.inicio h2{
+    font-weight:bold;
+}
+
+.inicio .btn{
+    margin-top:15px;
+}
+
+/* =========================
+   TARJETAS
+========================= */
+
 .card{
-    transition:0.4s;
-    box-shadow:0px 4px 10px rgba(0,0,0,0.2);
+    border:none;
+    border-radius:12px;
+    transition:.3s;
+    box-shadow:0 4px 10px rgba(0,0,0,.2);
 }
 
 .card:hover{
     transform:translateY(-5px);
 }
 
+.card h5{
+    font-weight:bold;
+}
+
+/* =========================
+   FORMULARIO
+========================= */
+
+#formulario{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 3px 8px rgba(0,0,0,.15);
+}
+
+#formulario input,
+#formulario select{
+    margin-bottom:5px;
+}
+
+/* =========================
+   CONTENEDOR DE REGISTROS
+========================= */
+
+#listaRegistros{
+    min-height:120px;
+}
+
+#listaRegistros .card{
+    margin-bottom:15px;
+}
+
+.badge{
+    font-size:14px;
+}
+
+/* =========================
+   ASIDE
+========================= */
+
 aside{
     background:#d9ecff;
     border-radius:10px;
+    padding:20px;
 }
+
+/* =========================
+   FOOTER
+========================= */
 
 footer{
     background:#022c54;
     color:white;
     padding:20px;
+    text-align:center;
 }
 
-html {
-    scroll-behavior: smooth;
+/* =========================
+   SCROLL SUAVE
+========================= */
+
+html{
+    scroll-behavior:smooth;
 }
 
-section {
-    scroll-margin-top: 90px;
+section{
+    scroll-margin-top:90px;
+    padding-top:15px;
+    padding-bottom:15px;
 }
+
+/* =========================
+   VALIDACIONES JS
+========================= */
+
+.mensaje-error{
+    font-size:13px;
+    color:#dc3545;
+    margin-top:5px;
+    margin-bottom:10px;
+}
+
+.is-valid{
+    border:2px solid #198754 !important;
+}
+
+.is-invalid{
+    border:2px solid #dc3545 !important;
+}
+
+/* =========================
+   MENSAJES
+========================= */
+
+.alert-success,
+.alert-danger,
+.alert-warning{
+    border-radius:8px;
+    padding:12px;
+}
+
+/* =========================
+   BOTONES
+========================= */
+
+.btn{
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:scale(1.03);
+}
+
+/* =========================
+   RESPONSIVE TABLET
+========================= */
 
 @media(max-width:768px){
-header h1{
-    font-size:28px;
-}
-.inicio{
-    padding:30px;
-}
+
+    header{
+        padding:30px;
+    }
+
+    header h1{
+        font-size:28px;
+    }
+
+    .inicio{
+        padding:35px;
+    }
+
+    .card{
+        margin-bottom:20px;
+    }
+
+    #formulario{
+        margin-bottom:30px;
+    }
+
 }
 
-/* ========================= */
-/* VALIDACIONES JS           */
-/* ========================= */
+/* =========================
+   RESPONSIVE CELULAR
+========================= */
 
-/* Mensajes de error debajo de campos */
-.mensaje-error{
-    font-size: 13px;
-    color: #dc3545;
-    margin-top: 5px;
-}
+@media(max-width:576px){
 
-/* Campo válido */
-.is-valid{
-    border: 2px solid #198754 !important;
-}
+    header h1{
+        font-size:24px;
+    }
 
-/* Campo inválido */
-.is-invalid{
-    border: 2px solid #dc3545 !important;
-}
+    .inicio{
+        padding:25px;
+    }
 
-/* Mensaje general de éxito/error */
-.alert-success{
-    padding: 10px;
-    border-radius: 5px;
-}
+    .inicio h2{
+        font-size:26px;
+    }
 
-.alert-danger{
-    padding: 10px;
-    border-radius: 5px;
+    .navbar-brand{
+        font-size:18px;
+    }
+
+    h2{
+        font-size:24px;
+    }
+
+    .card{
+        margin:10px 0;
+    }
+
+    footer{
+        font-size:14px;
+    }
+
 }

@@ -1,201 +1,410 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-const form = document.getElementById("formulario");
+    /* =====================================================
+       SISTEMA DE REGISTRO DE VEHÍCULOS
+       Archivo para futura integración con Flask.
+       El contenido dinámico será posteriormente reemplazado
+       por plantillas Jinja (Flask).
+    ====================================================== */
 
-const nombre = document.getElementById("nombre");
-const descripcion = document.getElementById("descripcion");
-const categoria = document.getElementById("categoria");
+    /* -------------------------
+       REFERENCIAS DEL DOM
+    -------------------------- */
 
-const lista = document.getElementById("listaRegistros");
-const total = document.getElementById("total");
-const mensaje = document.getElementById("mensaje");
+    const formulario = document.getElementById("formulario");
 
-const errorNombre = document.getElementById("errorNombre");
-const errorDescripcion = document.getElementById("errorDescripcion");
-const errorCategoria = document.getElementById("errorCategoria");
+    const nombre = document.getElementById("nombre");
+    const descripcion = document.getElementById("descripcion");
+    const categoria = document.getElementById("categoria");
 
-let registros = JSON.parse(localStorage.getItem("registros")) || [];
+    const listaRegistros = document.getElementById("listaRegistros");
+    const totalRegistros = document.getElementById("total");
+    const mensaje = document.getElementById("mensaje");
 
-/* =========================
-   FUNCIONES DE VALIDACIÓN
-========================= */
+    const errorNombre = document.getElementById("errorNombre");
+    const errorDescripcion = document.getElementById("errorDescripcion");
+    const errorCategoria = document.getElementById("errorCategoria");
 
-function validarNombre() {
+    /* ------------------------
+       ARREGLO DE OBJETOS
+       (Contenido dinámico)
+    --------------------------- */
 
-    const valor = nombre.value.trim();
+    let registros =
+        JSON.parse(localStorage.getItem("registros")) || [];
 
-    if (valor === "") {
-        setError(nombre, errorNombre, "El nombre es obligatorio");
-        return false;
+    /* ===========================
+       FUNCIONES DE VALIDACIÓN
+    =========================== */
+
+    function validarNombre() {
+
+        const valor = nombre.value.trim();
+
+        if (valor === "") {
+
+            mostrarError(
+                nombre,
+                errorNombre,
+                "El nombre es obligatorio."
+            );
+
+            return false;
+
+        }
+
+        if (valor.length < 5) {
+
+            mostrarError(
+                nombre,
+                errorNombre,
+                "Debe contener mínimo 5 caracteres."
+            );
+
+            return false;
+
+        }
+
+        mostrarCorrecto(nombre, errorNombre);
+
+        return true;
+
     }
 
-    if (valor.length < 5) {
-        setError(nombre, errorNombre, "Mínimo 5 caracteres");
-        return false;
+    function validarDescripcion() {
+
+        const valor = descripcion.value.trim();
+
+        if (valor === "") {
+
+            mostrarError(
+                descripcion,
+                errorDescripcion,
+                "La placa es obligatoria."
+            );
+
+            return false;
+
+        }
+
+        if (valor.length < 6) {
+
+            mostrarError(
+                descripcion,
+                errorDescripcion,
+                "Debe contener al menos 6 caracteres."
+            );
+
+            return false;
+
+        }
+
+        mostrarCorrecto(
+            descripcion,
+            errorDescripcion
+        );
+
+        return true;
+
     }
 
-    setSuccess(nombre, errorNombre);
-    return true;
-}
+    function validarCategoria() {
 
-function validarDescripcion() {
+        if (categoria.value === "") {
 
-    const valor = descripcion.value.trim();
+            mostrarError(
+                categoria,
+                errorCategoria,
+                "Seleccione el tipo de vehículo."
+            );
 
-    if (valor === "") {
-        setError(descripcion, errorDescripcion, "La placa es obligatoria");
-        return false;
+            return false;
+
+        }
+
+        mostrarCorrecto(
+            categoria,
+            errorCategoria
+        );
+
+        return true;
+
     }
 
-    if (valor.length < 6) {
-        setError(descripcion, errorDescripcion, "Debe tener al menos 6 caracteres");
-        return false;
+    /* -------------------------
+       ESTADOS VISUALES
+    ------------------------- */
+
+    function mostrarError(
+        input,
+        contenedorError,
+        texto
+    ) {
+
+        input.classList.remove("is-valid");
+        input.classList.add("is-invalid");
+
+        contenedorError.textContent = texto;
+
     }
 
-    setSuccess(descripcion, errorDescripcion);
-    return true;
-}
+    function mostrarCorrecto(
+        input,
+        contenedorError
+    ) {
 
-function validarCategoria() {
+        input.classList.remove("is-invalid");
+        input.classList.add("is-valid");
 
-    if (categoria.value === "") {
-        setError(categoria, errorCategoria, "Seleccione una categoría");
-        return false;
+        contenedorError.textContent = "";
+
     }
 
-    setSuccess(categoria, errorCategoria);
-    return true;
-}
+    /* ------------------------
+       VALIDACIÓN EN TIEMPO REAL
+    --------------------------- */
 
-/* =========================
-   ESTADOS VISUALES
-========================= */
+    nombre.addEventListener(
+        "input",
+        validarNombre
+    );
 
-function setError(input, errorDiv, mensajeError) {
-    input.classList.add("is-invalid");
-    input.classList.remove("is-valid");
-    errorDiv.textContent = mensajeError;
-}
+    nombre.addEventListener(
+        "blur",
+        validarNombre
+    );
 
-function setSuccess(input, errorDiv) {
-    input.classList.add("is-valid");
-    input.classList.remove("is-invalid");
-    errorDiv.textContent = "";
-}
+    descripcion.addEventListener(
+        "input",
+        validarDescripcion
+    );
 
-/* =========================
-   VALIDACIÓN EN TIEMPO REAL
-========================= */
+    descripcion.addEventListener(
+        "blur",
+        validarDescripcion
+    );
 
-nombre.addEventListener("input", validarNombre);
-nombre.addEventListener("blur", validarNombre);
+    categoria.addEventListener(
+        "change",
+        validarCategoria
+    );
 
-descripcion.addEventListener("input", validarDescripcion);
-descripcion.addEventListener("blur", validarDescripcion);
+    categoria.addEventListener(
+        "blur",
+        validarCategoria
+    );
 
-categoria.addEventListener("change", validarCategoria);
-categoria.addEventListener("blur", validarCategoria);
+    /* ===========================
+       SUBMIT DEL FORMULARIO
+    =========================== */
+        formulario.addEventListener("submit", function (evento) {
 
-/* =========================
-   SUBMIT DEL FORMULARIO
-========================= */
+        evento.preventDefault();
 
-form.addEventListener("submit", function (e) {
+        /* ===========================
+           VALIDACIÓN FORMULARIO
+        =========================== */
 
-    e.preventDefault();
+        const nombreValido = validarNombre();
+        const placaValida = validarDescripcion();
+        const categoriaValida = validarCategoria();
 
-    const n1 = validarNombre();
-    const n2 = validarDescripcion();
-    const n3 = validarCategoria();
+        if (!nombreValido || !placaValida || !categoriaValida) {
 
-    if (!n1 || !n2 || !n3) {
+            mensaje.innerHTML = `
+                <div class="alert alert-danger">
+                    Corrija los errores antes de registrar el vehículo.
+                </div>
+            `;
+
+            return;
+
+        }
+
+        /* ===========================
+           OBJETO DEL VEHÍCULO
+        =========================== */
+
+        const nuevoRegistro = {
+
+            id: Date.now(),
+
+            nombre: nombre.value.trim(),
+
+            descripcion: descripcion.value.trim(),
+
+            categoria: categoria.value
+
+        };
+
+        /* ===========================
+           AGREGAR AL ARREGLO
+        =========================== */
+
+        registros.push(nuevoRegistro);
+
+        /* ===========================
+           GUARDAR EN LOCALSTORAGE
+        =========================== */
+
+        localStorage.setItem(
+            "registros",
+            JSON.stringify(registros)
+        );
+
+        /* ===========================
+           ACTUALIZAR CONTENIDO DINÁMICO
+        =========================== */
+
+        renderizarRegistros();
+
+        /* ===========================
+           MENSAJE DE ÉXITO
+        =========================== */
 
         mensaje.innerHTML = `
-        <div class="alert alert-danger">
-            Corrige los errores antes de registrar
-        </div>`;
+            <div class="alert alert-success">
+                Vehículo registrado correctamente.
+            </div>
+        `;
 
-        return;
-    }
+        /* ===========================
+           LIMPIEZA DE FORMULARIO
+        =========================== */
 
-    const registro = {
-        id: Date.now(),
-        nombre: nombre.value.trim(),
-        descripcion: descripcion.value.trim(),
-        categoria: categoria.value
-    };
+        formulario.reset();
 
-    registros.push(registro);
-    localStorage.setItem("registros", JSON.stringify(registros));
+        nombre.classList.remove("is-valid");
+        descripcion.classList.remove("is-valid");
+        categoria.classList.remove("is-valid");
 
-    renderizar();
-
-    mensaje.innerHTML = `
-    <div class="alert alert-success">
-        Vehículo registrado correctamente
-    </div>`;
-
-    form.reset();
-
-    nombre.classList.remove("is-valid");
-    descripcion.classList.remove("is-valid");
-    categoria.classList.remove("is-valid");
-
-});
-
-/* =========================
-   RENDERIZAR REGISTROS
-========================= */
-
-function renderizar() {
-
-    lista.innerHTML = "";
-
-    registros.forEach(reg => {
-
-        const card = document.createElement("div");
-        card.classList.add("card", "p-2", "mb-2");
-
-        const body = document.createElement("div");
-        body.classList.add("card-body");
-
-        const titulo = document.createElement("h5");
-        titulo.textContent = reg.nombre;
-
-        const placa = document.createElement("p");
-        placa.textContent = "Placa: " + reg.descripcion;
-
-        const tipo = document.createElement("span");
-        tipo.classList.add("badge", "bg-primary");
-        tipo.textContent = reg.categoria;
-
-        const btn = document.createElement("button");
-        btn.textContent = "Eliminar";
-        btn.classList.add("btn", "btn-danger", "btn-sm", "mt-2");
-
-        btn.addEventListener("click", function () {
-
-            registros = registros.filter(r => r.id !== reg.id);
-            localStorage.setItem("registros", JSON.stringify(registros));
-
-            renderizar();
-        });
-
-        body.appendChild(titulo);
-        body.appendChild(placa);
-        body.appendChild(tipo);
-        body.appendChild(document.createElement("br"));
-        body.appendChild(btn);
-
-        card.appendChild(body);
-        lista.appendChild(card);
+        errorNombre.textContent = "";
+        errorDescripcion.textContent = "";
+        errorCategoria.textContent = "";
 
     });
 
-    total.textContent = registros.length;
-}
+    /* ===========================
+       RENDERIZAR REGISTROS
+    =========================== */
+        function renderizarRegistros() {
 
-/* cargar datos al inicio */
-renderizar();
+        /* ===========================================
+           LIMPIAR EL CONTENEDOR
+        ============================================ */
+
+        listaRegistros.innerHTML = "";
+
+        /* ===========================================
+           CONDICIÓN
+           Mostrar mensaje cuando no existan registros
+        ============================================ */
+
+        if (registros.length === 0) {
+
+            listaRegistros.innerHTML = `
+                <div class="alert alert-warning text-center">
+                    No existen vehículos registrados.
+                </div>
+            `;
+
+            totalRegistros.textContent = "0";
+
+            return;
+
+        }
+
+        /* ===========================================
+           ESTRUCTURA REPETITIVA (forEach)
+        ============================================ */
+
+        registros.forEach(function (registro) {
+
+            const tarjeta = document.createElement("div");
+
+            tarjeta.className = "card mb-3 shadow-sm";
+
+            tarjeta.innerHTML = `
+
+                <div class="card-body">
+
+                    <h5 class="card-title">
+                        ${registro.nombre}
+                    </h5>
+
+                    <p class="card-text">
+
+                        <strong>Placa:</strong>
+                        ${registro.descripcion}
+
+                    </p>
+
+                    <p>
+
+                        <span class="badge bg-primary">
+
+                            ${registro.categoria}
+
+                        </span>
+
+                    </p>
+
+                    <button
+                        class="btn btn-danger btn-sm">
+
+                        Eliminar
+
+                    </button>
+
+                </div>
+
+            `;
+
+            /* ===========================
+               BOTÓN ELIMINAR
+            =========================== */
+
+            const botonEliminar =
+                tarjeta.querySelector("button");
+
+            botonEliminar.addEventListener(
+                "click",
+                function () {
+
+                    registros = registros.filter(function (vehiculo) {
+
+                        return vehiculo.id !== registro.id;
+
+                    });
+
+                    localStorage.setItem(
+                        "registros",
+                        JSON.stringify(registros)
+                    );
+
+                    renderizarRegistros();
+
+                }
+            );
+
+            listaRegistros.appendChild(tarjeta);
+
+        });
+
+        /* ===========================
+           ACTUALIZAR CONTADOR
+        =========================== */
+
+        totalRegistros.textContent = registros.length;
+
+    }
+
+    /* ===========================
+       CARGAR INFORMACIÓN
+       CARGAR REGISTROS AL INICIAR LA PÁGINA
+    ============================================ */
+
+    renderizarRegistros();
+
 
 });
