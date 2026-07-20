@@ -2,42 +2,49 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Sistema de Registro de Vehículos</title>
 
-    <!-- Bootstrap -->
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- CSS -->
+    <!-- CSS propio -->
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-<!--------------------------------------------------------------->
-<!-- FUTURA PLANTILLA base.html                               --->
-<!-- Esta sección será reutilizable en todas las páginas       -->
-<!------------------------------------------------------------ -->
-
-<!-------- HEADER ------->
+<!--==========================
+        HEADER
+===========================-->
 
 <header class="text-center">
+
     <h1>Sistema de Registro de Vehículos</h1>
-    <p>Control eficiente de ingresos y salidas</p>
+
+    <p>
+        Control eficiente de ingresos y salidas
+    </p>
+
 </header>
 
-<!------- NAVBAR --------->
+<!--==========================
+        NAVBAR
+===========================-->
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
 
     <div class="container">
 
-        <a class="navbar-brand" href="#">Parqueadero</a>
+        <a class="navbar-brand fw-bold" href="#">
+            Parqueadero
+        </a>
 
-        <button
-            class="navbar-toggler"
+        <button class="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#menu">
@@ -51,19 +58,27 @@
             <ul class="navbar-nav ms-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#inicio">Inicio</a>
+                    <a class="nav-link" href="#inicio">
+                        Inicio
+                    </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#quienes">Quiénes Somos</a>
+                    <a class="nav-link" href="#quienes">
+                        Quiénes Somos
+                    </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#servicios">Servicios</a>
+                    <a class="nav-link" href="#servicios">
+                        Servicios
+                    </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#contacto">Contacto</a>
+                    <a class="nav-link" href="#contacto">
+                        Contacto
+                    </a>
                 </li>
 
             </ul>
@@ -74,353 +89,521 @@
 
 </nav>
 
-<!-- ========================================================= -->
-<!-- En Flask esta sección correspondería a:                   -->
-<!-- ========================================================= -->
+<!--==========================
+        CONTENIDO
+===========================-->
 
 <main class="container">
 
-    <!-- =================== INICIO =================== -->
+<!--==========================
+        INICIO
+===========================-->
 
-    <section id="inicio" class="inicio text-center rounded mt-4">
+<section id="inicio" class="inicio rounded mt-4 text-center">
 
-        <h2>Bienvenidos</h2>
+    <h2>Bienvenidos</h2>
 
-        <p>
-            Herramienta digital para el control y administración
-            de vehículos dentro del parqueadero.
-        </p>
+    <p>
 
-        <a href="#servicios" class="btn btn-warning">
-            Ver Servicios
-        </a>
+        Herramienta digital para administrar
+        el ingreso y salida de vehículos
+        dentro del parqueadero.
 
-        <div class="ratio ratio-16x9 mt-4">
+    </p>
 
-            <iframe
-                src="https://www.youtube.com/embed/f_OVRZ-zc30"
-                title="Sistema de Parqueadero"
-                allowfullscreen>
+    <a href="#formRegistro"
+        class="btn btn-warning">
 
-            </iframe>
+        Registrar Vehículo
+
+    </a>
+
+    <div class="ratio ratio-16x9 mt-4">
+
+        <iframe
+            src="https://www.youtube.com/embed/f_OVRZ-zc30"
+            title="Sistema de Parqueadero"
+            allowfullscreen>
+
+        </iframe>
+
+    </div>
+
+</section>
+
+<!--==========================
+      QUIENES SOMOS
+===========================-->
+
+<section id="quienes" class="mt-5">
+
+    <h2 class="text-center mb-4">
+
+        Quiénes Somos
+
+    </h2>
+
+    <div class="row align-items-center">
+
+        <div class="col-md-6">
+
+            <p>
+
+                Nuestro sistema permite registrar,
+                administrar y consultar la información
+                de los vehículos ingresados al
+                parqueadero.
+
+                Toda la información queda almacenada
+                dinámicamente utilizando JavaScript y
+                LocalStorage.
+
+            </p>
 
         </div>
 
-    </section>
+        <div class="col-md-6 text-center">
 
-    <!-- ================= QUIÉNES SOMOS ================= -->
-
-    <section id="quienes" class="mt-5">
-
-        <h2 class="text-center mb-4">
-            Quiénes Somos
-        </h2>
-
-        <div class="row align-items-center">
-
-            <div class="col-md-6">
-
-                <p>
-
-                    Sistema web orientado al registro y control
-                    de vehículos dentro de un parqueadero.
-
-                    Permite almacenar información del propietario,
-                    placa y tipo de vehículo para mejorar la
-                    organización y optimizar la administración
-                    del parqueadero.
-
-                </p>
-
-            </div>
-
-            <div class="col-md-6 text-center">
-
-                <img
-                    src="img/carro.jpg"
-                    class="img-fluid rounded shadow"
-                    alt="Vehículo">
-
-            </div>
+            <img
+                src="img/carro.jpg"
+                class="img-fluid rounded shadow"
+                alt="Vehículo">
 
         </div>
 
-    </section>
+    </div>
 
-    <!-- ================= SERVICIOS ================= -->
+</section>
 
-    <section id="servicios" class="mt-5">
+<!--==========================
+      SERVICIOS
+===========================-->
 
-        <h2 class="text-center mb-4">
-            Servicios
-        </h2>
+<section id="servicios" class="mt-5">
 
-        <div class="row" id="contenedorServicios">
+    <h2 class="text-center mb-4">
 
-            <!--
-                Estas tarjetas podrían generarse dinámicamente
-                desde Flask en futuras versiones.
-            -->
+        Servicios
 
-            <div class="col-md-4">
+    </h2>
 
-                <div class="card p-3 m-3 text-center">
+    <div class="row g-4">
 
-                    <h5>Registro de Vehículos</h5>
+        <div class="col-md-4">
 
-                    <p>Ingreso de información del vehículo.</p>
+            <div class="card h-100 text-center">
 
-                    <a href="#formRegistro" class="btn btn-primary">
-                        Registrar vehículo
+                <div class="card-body">
+
+                    <h5 class="card-title">
+
+                        Registro
+
+                    </h5>
+
+                    <p>
+
+                        Registro completo de vehículos.
+
+                    </p>
+
+                    <a href="#formRegistro"
+                        class="btn btn-primary">
+
+                        Registrar
+
                     </a>
 
                 </div>
 
             </div>
 
-            <div class="col-md-4">
-
-                <div class="card p-3 m-3 text-center">
-
-                    <h5>Entradas y Salidas</h5>
-
-                    <p>Control de acceso de vehículos.</p>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-4">
-
-                <div class="card p-3 m-3 text-center">
-
-                    <h5>Historial</h5>
-
-                    <p>Consulta de registros almacenados.</p>
-
-                </div>
-
-            </div>
-
         </div>
 
-        <hr class="my-5">
+        <div class="col-md-4">
 
-        <h2 class="text-center mb-4">
-            Registro de Vehículos
-        </h2>
+            <div class="card h-100 text-center">
 
-        <div id="formRegistro" class="row">
-
-            <!-- ================= FORMULARIO ================= -->
-
-            <div class="col-lg-5">
-
-                <form id="formulario" novalidate>
-
-                    <input
-                        type="text"
-                        id="nombre"
-                        class="form-control"
-                        placeholder="Nombre del propietario">
-
-                    <div id="errorNombre" class="mensaje-error"></div>
-
-                    <input
-                        type="text"
-                        id="descripcion"
-                        class="form-control mt-3"
-                        placeholder="Placa del vehículo">
-
-                    <div id="errorDescripcion" class="mensaje-error"></div>
-
-                    <select
-                        id="categoria"
-                        class="form-select mt-3">
-
-                        <option value="">
-                            Seleccione el tipo
-                        </option>
-
-                        <option>
-                            Automóvil
-                        </option>
-
-                        <option>
-                            Motocicleta
-                        </option>
-
-                        <option>
-                            Camioneta
-                        </option>
-
-                    </select>
-
-                    <div id="errorCategoria" class="mensaje-error"></div>
-
-                    <button
-                        type="submit"
-                        class="btn btn-success w-100 mt-3">
-
-                        Registrar Vehículo
-
-                    </button>
-
-                </form>
-
-                <div id="mensaje" class="mt-3"></div>
-
-            </div>
-
-            <!-- ================= CONTENIDO DINÁMICO ================= -->
-
-            <div class="col-lg-7">
-
-                <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="card-body">
 
                     <h5>
 
-                        Total de registros:
-                        <span id="total">0</span>
-
-                    </h5>
-
-                </div>
-
-                <!--
-                    Esta sección será generada dinámicamente
-                    mediante JavaScript y en Flask
-                    posteriormente con Jinja.
-                -->
-
-                <div id="listaRegistros">
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- ================= CONTACTO ================= -->
-
-    <section id="contacto" class="mt-5 mb-5">
-
-        <h2 class="text-center mb-4">
-
-            Contacto
-
-        </h2>
-
-        <div class="row">
-
-            <div class="col-md-6">
-
-                <h4>Escríbenos</h4>
-
-                <form>
-
-                    <input
-                        type="text"
-                        class="form-control mb-3"
-                        placeholder="Nombre">
-
-                    <input
-                        type="email"
-                        class="form-control mb-3"
-                        placeholder="Correo">
-
-                    <textarea
-                        class="form-control mb-3"
-                        rows="5"
-                        placeholder="Mensaje"></textarea>
-
-                    <button
-                        class="btn btn-success w-100">
-
-                        Enviar
-
-                    </button>
-
-                </form>
-
-            </div>
-
-            <div class="col-md-6">
-
-                <h4>Información de contacto</h4>
-
-                <p><strong>Email:</strong> contacto@parqueadero.com</p>
-
-                <p><strong>Teléfono:</strong> +593 999999999</p>
-
-                <p><strong>Dirección:</strong> Ambato - Ecuador</p>
-
-                <p>
-
-                    <a href="#">Facebook</a> |
-                    <a href="#">Instagram</a>
-
-                </p>
-
-            </div>
-
-        </div>
-
-        <div class="row mt-4">
-
-            <div class="col-12">
-
-                <aside class="p-3">
-
-                    <h5>
-
-                        Información adicional
+                        Control
 
                     </h5>
 
                     <p>
 
-                        Horario de atención:
-
-                        <br>
-
-                        Lunes a viernes
-
-                        <br>
-
-                        08:00 a 17:00
+                        Gestión de entradas y salidas.
 
                     </p>
 
-                </aside>
+                </div>
 
             </div>
 
         </div>
 
-    </section>
+        <div class="col-md-4">
+
+            <div class="card h-100 text-center">
+
+                <div class="card-body">
+
+                    <h5>
+
+                        Historial
+
+                    </h5>
+
+                    <p>
+
+                        Consulta de registros almacenados.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+<!--==========================
+      FORMULARIO
+===========================-->
+
+<hr class="my-5">
+
+<h2 class="text-center mb-4">
+
+Registro de Vehículos
+
+</h2>
+
+<div id="formRegistro" class="row g-4">
+
+<div class="col-lg-5">
+
+<form id="formulario" novalidate>
+
+<div class="mb-3">
+
+<label
+for="nombre"
+class="form-label">
+
+Nombre del propietario
+
+</label>
+
+<input
+type="text"
+id="nombre"
+class="form-control"
+placeholder="Ingrese el nombre">
+
+<div
+id="errorNombre"
+class="mensaje-error">
+
+</div>
+
+</div>
+
+<div class="mb-3">
+
+<label
+for="descripcion"
+class="form-label">
+
+Placa
+
+</label>
+
+<input
+type="text"
+id="descripcion"
+class="form-control"
+placeholder="Ejemplo: ABC1234">
+
+<div
+id="errorDescripcion"
+class="mensaje-error">
+
+</div>
+
+</div>
+
+<div class="mb-3">
+
+<label
+for="categoria"
+class="form-label">
+
+Tipo de Vehículo
+
+</label>
+
+<select
+id="categoria"
+class="form-select">
+
+<option value="">
+Seleccione
+
+</option>
+
+<option>
+Automóvil
+</option>
+
+<option>
+Motocicleta
+</option>
+
+<option>
+Camioneta
+</option>
+
+</select>
+
+<div
+id="errorCategoria"
+class="mensaje-error">
+
+</div>
+
+</div>
+
+<button
+type="submit"
+class="btn btn-success w-100">
+
+Registrar Vehículo
+
+</button>
+
+</form>
+
+<!-- Spinner -->
+
+<div
+id="spinnerCarga"
+class="text-center mt-3 d-none">
+
+<div
+class="spinner-border text-primary"
+role="status">
+
+<span class="visually-hidden">
+
+Cargando...
+
+</span>
+
+</div>
+
+</div>
+
+<div
+id="mensaje"
+class="mt-3">
+
+</div>
+
+</div>
+
+<!--==========================
+      REGISTROS
+===========================-->
+
+<div class="col-lg-7">
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+
+<h5>
+
+Total de registros:
+
+<span id="total">
+
+0
+
+</span>
+
+</h5>
+
+</div>
+
+<div id="listaRegistros">
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!--==========================
+      CONTACTO
+===========================-->
+
+<section id="contacto" class="mt-5 mb-5">
+
+<h2 class="text-center mb-4">
+
+Contacto
+
+</h2>
+
+<div class="row">
+
+<div class="col-md-6">
+
+<form>
+
+<input
+type="text"
+class="form-control mb-3"
+placeholder="Nombre">
+
+<input
+type="email"
+class="form-control mb-3"
+placeholder="Correo">
+
+<textarea
+rows="5"
+class="form-control mb-3"
+placeholder="Mensaje">
+
+</textarea>
+
+<button
+class="btn btn-success w-100">
+
+Enviar
+
+</button>
+
+</form>
+
+</div>
+
+<div class="col-md-6">
+
+<h4>
+
+Información
+
+</h4>
+
+<p>
+
+<strong>Email:</strong>
+
+contacto@parqueadero.com
+
+</p>
+
+<p>
+
+<strong>Teléfono:</strong>
+
++593 999999999
+
+</p>
+
+<p>
+
+<strong>Dirección:</strong>
+
+Ambato - Ecuador
+
+</p>
+
+</div>
+
+</div>
+
+</section>
 
 </main>
 
-<!-- {% endblock %} -->
-
-<!-- ===== FOOTER (base.html) ===== -->
-
 <footer class="text-center">
 
-    <p>
+<p>
 
-        Ismenia Romero - 2026 - Desarrollo Web
+Ismenia Romero -Desarrollo Web - 2026
 
-    </p>
+</p>
 
 </footer>
 
+<!--==========================
+      MODAL
+===========================-->
+
+<div
+class="modal fade"
+id="modalRegistro"
+tabindex="-1">
+
+<div class="modal-dialog">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h5 class="modal-title">
+
+Registro exitoso
+
+</h5>
+
+<button
+class="btn-close"
+data-bs-dismiss="modal">
+
+</button>
+
+</div>
+
+<div
+class="modal-body"
+id="detalleModal">
+
+</div>
+
+<div class="modal-footer">
+
+<button
+class="btn btn-primary"
+data-bs-dismiss="modal">
+
+Aceptar
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Bootstrap JS -->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- JavaScript -->
 
 <script src="script.js"></script>
 
 </body>
+
 </html>

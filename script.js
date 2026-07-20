@@ -2,14 +2,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* =====================================================
        SISTEMA DE REGISTRO DE VEHÍCULOS
-       Archivo para futura integración con Flask.
-       El contenido dinámico será posteriormente reemplazado
-       por plantillas Jinja (Flask).
+       Bootstrap + Validaciones + LocalStorage
+       Preparado para futura integración con Flask
     ====================================================== */
 
-    /* -------------------------
+    /* ==========================
        REFERENCIAS DEL DOM
-    -------------------------- */
+    ========================== */
 
     const formulario = document.getElementById("formulario");
 
@@ -25,17 +24,33 @@ document.addEventListener("DOMContentLoaded", function () {
     const errorDescripcion = document.getElementById("errorDescripcion");
     const errorCategoria = document.getElementById("errorCategoria");
 
-    /* ------------------------
-       ARREGLO DE OBJETOS
-       (Contenido dinámico)
-    --------------------------- */
+    /* ==========================
+       NUEVOS ELEMENTOS BOOTSTRAP
+    ========================== */
+
+    const spinner =
+        document.getElementById("spinnerCarga");
+
+    const detalleModal =
+        document.getElementById("detalleModal");
+
+    const modalBootstrap =
+        new bootstrap.Modal(
+            document.getElementById("modalRegistro")
+        );
+
+    /* ==========================
+       LOCAL STORAGE
+    ========================== */
 
     let registros =
-        JSON.parse(localStorage.getItem("registros")) || [];
+        JSON.parse(
+            localStorage.getItem("registros")
+        ) || [];
 
-    /* ===========================
-       FUNCIONES DE VALIDACIÓN
-    =========================== */
+    /* =====================================================
+                    VALIDACIONES
+    ====================================================== */
 
     function validarNombre() {
 
@@ -65,7 +80,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
 
-        mostrarCorrecto(nombre, errorNombre);
+        mostrarCorrecto(
+            nombre,
+            errorNombre
+        );
 
         return true;
 
@@ -131,38 +149,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-    /* -------------------------
-       ESTADOS VISUALES
-    ------------------------- */
+    /* =====================================================
+                ESTADOS VISUALES
+    ====================================================== */
 
     function mostrarError(
         input,
-        contenedorError,
+        contenedor,
         texto
     ) {
 
         input.classList.remove("is-valid");
+
         input.classList.add("is-invalid");
 
-        contenedorError.textContent = texto;
+        contenedor.textContent = texto;
 
     }
 
     function mostrarCorrecto(
         input,
-        contenedorError
+        contenedor
     ) {
 
         input.classList.remove("is-invalid");
+
         input.classList.add("is-valid");
 
-        contenedorError.textContent = "";
+        contenedor.textContent = "";
 
     }
 
-    /* ------------------------
-       VALIDACIÓN EN TIEMPO REAL
-    --------------------------- */
+    /* =====================================================
+          VALIDACIÓN EN TIEMPO REAL
+    ====================================================== */
 
     nombre.addEventListener(
         "input",
@@ -194,118 +214,166 @@ document.addEventListener("DOMContentLoaded", function () {
         validarCategoria
     );
 
-    /* ===========================
-       SUBMIT DEL FORMULARIO
-    =========================== */
-        formulario.addEventListener("submit", function (evento) {
+    /* =====================================================
+             ENVÍO DEL FORMULARIO
+    ====================================================== */
 
-        evento.preventDefault();
+    formulario.addEventListener(
+        "submit",
+        function (evento) {
 
-        /* ===========================
-           VALIDACIÓN FORMULARIO
-        =========================== */
+            evento.preventDefault();
 
-        const nombreValido = validarNombre();
-        const placaValida = validarDescripcion();
-        const categoriaValida = validarCategoria();
+            const nombreValido =
+                validarNombre();
 
-        if (!nombreValido || !placaValida || !categoriaValida) {
+            const placaValida =
+                validarDescripcion();
 
-            mensaje.innerHTML = `
-                <div class="alert alert-danger">
-                    Corrija los errores antes de registrar el vehículo.
-                </div>
-            `;
+            const categoriaValida =
+                validarCategoria();
 
-            return;
+            if (
+                !nombreValido ||
+                !placaValida ||
+                !categoriaValida
+            ) {
+
+                mensaje.innerHTML = `
+                    <div class="alert alert-danger">
+                        Corrija los errores antes de registrar el vehículo.
+                    </div>
+                `;
+
+                return;
+
+            }
+
+            /* ======================================
+               MOSTRAR SPINNER
+            ======================================= */
+
+            spinner.classList.remove("d-none");
+
+            /* ======================================
+               SIMULACIÓN DE CARGA
+            ======================================= */
+
+            setTimeout(function () {
+
+                spinner.classList.add("d-none");
+
+                const nuevoRegistro = {
+
+                    id: Date.now(),
+
+                    nombre:
+                        nombre.value.trim(),
+
+                    descripcion:
+                        descripcion.value.trim(),
+
+                    categoria:
+                        categoria.value
+
+                };
+
+                registros.push(
+                    nuevoRegistro
+                );
+
+                localStorage.setItem(
+                    "registros",
+                    JSON.stringify(registros)
+                );
+
+                renderizarRegistros();
+
+                mensaje.innerHTML = `
+                    <div class="alert alert-success alert-dismissible fade show">
+
+                        Vehículo registrado correctamente.
+
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert">
+                        </button>
+
+                    </div>
+                `;
+
+                detalleModal.innerHTML = `
+
+                    <p>
+
+                        <strong>Propietario:</strong>
+
+                        ${nuevoRegistro.nombre}
+
+                    </p>
+
+                    <p>
+
+                        <strong>Placa:</strong>
+
+                        ${nuevoRegistro.descripcion}
+
+                    </p>
+
+                    <p>
+
+                        <strong>Tipo:</strong>
+
+                        ${nuevoRegistro.categoria}
+
+                    </p>
+
+                `;
+
+                modalBootstrap.show();
+
+                formulario.reset();
+
+                nombre.classList.remove("is-valid");
+                descripcion.classList.remove("is-valid");
+                categoria.classList.remove("is-valid");
+
+                errorNombre.textContent = "";
+                errorDescripcion.textContent = "";
+                errorCategoria.textContent = "";
+
+            }, 1500);
 
         }
 
-        /* ===========================
-           OBJETO DEL VEHÍCULO
-        =========================== */
+    );
 
-        const nuevoRegistro = {
-
-            id: Date.now(),
-
-            nombre: nombre.value.trim(),
-
-            descripcion: descripcion.value.trim(),
-
-            categoria: categoria.value
-
-        };
-
-        /* ===========================
-           AGREGAR AL ARREGLO
-        =========================== */
-
-        registros.push(nuevoRegistro);
-
-        /* ===========================
-           GUARDAR EN LOCALSTORAGE
-        =========================== */
-
-        localStorage.setItem(
-            "registros",
-            JSON.stringify(registros)
-        );
-
-        /* ===========================
-           ACTUALIZAR CONTENIDO DINÁMICO
-        =========================== */
-
-        renderizarRegistros();
-
-        /* ===========================
-           MENSAJE DE ÉXITO
-        =========================== */
-
-        mensaje.innerHTML = `
-            <div class="alert alert-success">
-                Vehículo registrado correctamente.
-            </div>
-        `;
-
-        /* ===========================
-           LIMPIEZA DE FORMULARIO
-        =========================== */
-
-        formulario.reset();
-
-        nombre.classList.remove("is-valid");
-        descripcion.classList.remove("is-valid");
-        categoria.classList.remove("is-valid");
-
-        errorNombre.textContent = "";
-        errorDescripcion.textContent = "";
-        errorCategoria.textContent = "";
-
-    });
-
-    /* ===========================
-       RENDERIZAR REGISTROS
-    =========================== */
+    /* =====================================================
+            RENDERIZAR REGISTROS
+    ====================================================== */
         function renderizarRegistros() {
 
         /* ===========================================
-           LIMPIAR EL CONTENEDOR
+           LIMPIAR CONTENEDOR
         ============================================ */
 
         listaRegistros.innerHTML = "";
 
         /* ===========================================
-           CONDICIÓN
-           Mostrar mensaje cuando no existan registros
+           SI NO EXISTEN REGISTROS
         ============================================ */
 
         if (registros.length === 0) {
 
             listaRegistros.innerHTML = `
+
                 <div class="alert alert-warning text-center">
+
                     No existen vehículos registrados.
+
                 </div>
+
             `;
 
             totalRegistros.textContent = "0";
@@ -315,54 +383,63 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         /* ===========================================
-           ESTRUCTURA REPETITIVA (forEach)
+           RECORRER REGISTROS
         ============================================ */
 
         registros.forEach(function (registro) {
 
-            const tarjeta = document.createElement("div");
+            const tarjeta =
+                document.createElement("div");
 
-            tarjeta.className = "card mb-3 shadow-sm";
+            tarjeta.className =
+                "card mb-3 shadow-sm";
 
             tarjeta.innerHTML = `
 
                 <div class="card-body">
 
-                    <h5 class="card-title">
-                        ${registro.nombre}
-                    </h5>
+                    <div class="d-flex justify-content-between align-items-start">
 
-                    <p class="card-text">
+                        <div>
 
-                        <strong>Placa:</strong>
-                        ${registro.descripcion}
+                            <h5 class="card-title">
 
-                    </p>
+                                ${registro.nombre}
 
-                    <p>
+                            </h5>
 
-                        <span class="badge bg-primary">
+                            <p class="card-text mb-2">
 
-                            ${registro.categoria}
+                                <strong>Placa:</strong>
 
-                        </span>
+                                ${registro.descripcion}
 
-                    </p>
+                            </p>
 
-                    <button
-                        class="btn btn-danger btn-sm">
+                            <span class="badge bg-primary">
 
-                        Eliminar
+                                ${registro.categoria}
 
-                    </button>
+                            </span>
+
+                        </div>
+
+                        <button
+                            class="btn btn-danger btn-sm">
+
+                            Eliminar
+
+                        </button>
+
+                    </div>
 
                 </div>
 
             `;
 
-            /* ===========================
+            /* ===========================================
                BOTÓN ELIMINAR
-            =========================== */
+            ============================================ */
 
             const botonEliminar =
                 tarjeta.querySelector("button");
@@ -371,40 +448,71 @@ document.addEventListener("DOMContentLoaded", function () {
                 "click",
                 function () {
 
-                    registros = registros.filter(function (vehiculo) {
+                    if (
+                        confirm(
+                            "¿Está seguro de eliminar este registro?"
+                        )
+                    ) {
 
-                        return vehiculo.id !== registro.id;
+                        registros = registros.filter(
+                            function (vehiculo) {
 
-                    });
+                                return (
+                                    vehiculo.id !== registro.id
+                                );
 
-                    localStorage.setItem(
-                        "registros",
-                        JSON.stringify(registros)
-                    );
+                            }
+                        );
 
-                    renderizarRegistros();
+                        localStorage.setItem(
+                            "registros",
+                            JSON.stringify(registros)
+                        );
+
+                        renderizarRegistros();
+
+                        mensaje.innerHTML = `
+
+                            <div class="alert alert-warning alert-dismissible fade show">
+
+                                Registro eliminado correctamente.
+
+                                <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="alert">
+
+                                </button>
+
+                            </div>
+
+                        `;
+
+                    }
 
                 }
+
             );
 
-            listaRegistros.appendChild(tarjeta);
+            listaRegistros.appendChild(
+                tarjeta
+            );
 
         });
 
-        /* ===========================
+        /* ===========================================
            ACTUALIZAR CONTADOR
-        =========================== */
+        ============================================ */
 
-        totalRegistros.textContent = registros.length;
+        totalRegistros.textContent =
+            registros.length;
 
     }
 
-    /* ===========================
-       CARGAR INFORMACIÓN
-       CARGAR REGISTROS AL INICIAR LA PÁGINA
+    /* ===========================================
+       CARGAR REGISTROS AL INICIAR
     ============================================ */
 
     renderizarRegistros();
-
 
 });

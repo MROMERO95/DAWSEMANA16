@@ -1,29 +1,32 @@
-/* =======================================================
+/* ==========================================================
    SISTEMA DE REGISTRO DE VEHÍCULOS
-   Archivo: style.css
-   Preparado para futura integración con Flask
-======================================================= */
+   Bootstrap + CSS Personalizado
+   ========================================================== */
 
-/* =========================
+/* ===========================
    ESTILOS GENERALES
-========================= */
+=========================== */
+
+html{
+    scroll-behavior:smooth;
+}
 
 body{
-    font-family: Arial, Helvetica, sans-serif;
-    background-color:#d3d9d5;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#d3d9d5;
     margin:0;
     padding:0;
     line-height:1.6;
 }
 
-/* =========================
+/* ===========================
    HEADER
-========================= */
+=========================== */
 
 header{
     background:#120251;
-    color:white;
-    padding:40px;
+    color:#fff;
+    padding:45px 20px;
     text-align:center;
 }
 
@@ -34,214 +37,393 @@ header h1{
 
 header p{
     margin:0;
+    font-size:18px;
 }
 
-/* =========================
-   SECCIÓN INICIO
-========================= */
+/* ===========================
+   NAVBAR
+=========================== */
+
+.navbar{
+    box-shadow:0 2px 8px rgba(0,0,0,.20);
+}
+
+.navbar-brand{
+    font-weight:bold;
+    font-size:22px;
+}
+
+.nav-link{
+    transition:.3s;
+}
+
+.nav-link:hover{
+    color:#ffc107 !important;
+}
+
+/* ===========================
+   SECCIONES
+=========================== */
+
+section{
+    scroll-margin-top:90px;
+    padding-top:20px;
+    padding-bottom:20px;
+}
+
+h2{
+    font-weight:bold;
+}
+
+/* ===========================
+   INICIO
+=========================== */
 
 .inicio{
     background:#566ddb;
     color:white;
-    padding:60px;
+    padding:60px 30px;
 }
 
 .inicio h2{
-    font-weight:bold;
+    font-size:36px;
+    margin-bottom:20px;
 }
 
-.inicio .btn{
-    margin-top:15px;
+.inicio p{
+    font-size:18px;
 }
 
-/* =========================
+/* ===========================
    TARJETAS
-========================= */
+=========================== */
 
 .card{
+
     border:none;
-    border-radius:12px;
-    transition:.3s;
-    box-shadow:0 4px 10px rgba(0,0,0,.2);
+
+    border-radius:15px;
+
+    transition:.35s;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.18);
+
 }
 
 .card:hover{
-    transform:translateY(-5px);
+
+    transform:translateY(-6px);
+
+    box-shadow:0 8px 18px rgba(0,0,0,.25);
+
 }
 
-.card h5{
+.card-title{
+
     font-weight:bold;
+
 }
 
-/* =========================
+/* ===========================
    FORMULARIO
-========================= */
+=========================== */
 
 #formulario{
-    background:white;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0 3px 8px rgba(0,0,0,.15);
+
+    background:#fff;
+
+    padding:25px;
+
+    border-radius:12px;
+
+    box-shadow:0 5px 12px rgba(0,0,0,.18);
+
 }
 
-#formulario input,
-#formulario select{
-    margin-bottom:5px;
+.form-label{
+
+    font-weight:bold;
+
 }
 
-/* =========================
-   CONTENEDOR DE REGISTROS
-========================= */
+.form-control,
+.form-select{
 
-#listaRegistros{
-    min-height:120px;
+    transition:.3s;
+
 }
 
-#listaRegistros .card{
-    margin-bottom:15px;
+.form-control:focus,
+.form-select:focus{
+
+    box-shadow:0 0 8px rgba(13,110,253,.35);
+
 }
 
-.badge{
-    font-size:14px;
-}
-
-/* =========================
-   ASIDE
-========================= */
-
-aside{
-    background:#d9ecff;
-    border-radius:10px;
-    padding:20px;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-    background:#022c54;
-    color:white;
-    padding:20px;
-    text-align:center;
-}
-
-/* =========================
-   SCROLL SUAVE
-========================= */
-
-html{
-    scroll-behavior:smooth;
-}
-
-section{
-    scroll-margin-top:90px;
-    padding-top:15px;
-    padding-bottom:15px;
-}
-
-/* =========================
-   VALIDACIONES JS
-========================= */
+/* ===========================
+   VALIDACIONES
+=========================== */
 
 .mensaje-error{
-    font-size:13px;
+
     color:#dc3545;
+
+    font-size:13px;
+
     margin-top:5px;
+
     margin-bottom:10px;
+
 }
 
 .is-valid{
+
     border:2px solid #198754 !important;
+
 }
 
 .is-invalid{
+
     border:2px solid #dc3545 !important;
+
 }
 
-/* =========================
-   MENSAJES
-========================= */
+/* ===========================
+   ALERTAS
+=========================== */
 
-.alert-success,
-.alert-danger,
-.alert-warning{
-    border-radius:8px;
-    padding:12px;
+.alert{
+
+    border-radius:10px;
+
 }
 
-/* =========================
+/* ===========================
+   CONTADOR
+=========================== */
+
+#total{
+
+    font-weight:bold;
+
+    color:#0d6efd;
+
+}
+
+/* ===========================
+   REGISTROS
+=========================== */
+
+#listaRegistros{
+
+    min-height:150px;
+
+}
+
+#listaRegistros .card{
+
+    margin-bottom:18px;
+
+}
+
+.badge{
+
+    font-size:14px;
+
+}
+
+/* ===========================
    BOTONES
-========================= */
+=========================== */
 
 .btn{
+
     transition:.3s;
+
 }
 
 .btn:hover{
+
     transform:scale(1.03);
+
 }
 
-/* =========================
+/* ===========================
+   SPINNER
+=========================== */
+
+#spinnerCarga{
+
+    padding:20px;
+
+}
+
+/* ===========================
+   MODAL
+=========================== */
+
+.modal-content{
+
+    border-radius:15px;
+
+}
+
+.modal-header{
+
+    background:#0d6efd;
+
+    color:white;
+
+}
+
+.modal-title{
+
+    font-weight:bold;
+
+}
+
+/* ===========================
+   CONTACTO
+=========================== */
+
+#contacto form{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:12px;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
+
+}
+
+#contacto h4{
+
+    font-weight:bold;
+
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+
+footer{
+
+    background:#022c54;
+
+    color:white;
+
+    padding:20px;
+
+    text-align:center;
+
+    margin-top:30px;
+
+}
+
+footer p{
+
+    margin:0;
+
+}
+
+/* ===========================
    RESPONSIVE TABLET
-========================= */
+=========================== */
 
 @media(max-width:768px){
 
-    header{
-        padding:30px;
-    }
+header{
 
-    header h1{
-        font-size:28px;
-    }
-
-    .inicio{
-        padding:35px;
-    }
-
-    .card{
-        margin-bottom:20px;
-    }
-
-    #formulario{
-        margin-bottom:30px;
-    }
+padding:35px 20px;
 
 }
 
-/* =========================
+header h1{
+
+font-size:30px;
+
+}
+
+.inicio{
+
+padding:40px 20px;
+
+}
+
+.inicio h2{
+
+font-size:30px;
+
+}
+
+#formulario{
+
+margin-bottom:30px;
+
+}
+
+}
+
+/* ===========================
    RESPONSIVE CELULAR
-========================= */
+=========================== */
 
 @media(max-width:576px){
 
-    header h1{
-        font-size:24px;
-    }
+header h1{
 
-    .inicio{
-        padding:25px;
-    }
+font-size:24px;
 
-    .inicio h2{
-        font-size:26px;
-    }
+}
 
-    .navbar-brand{
-        font-size:18px;
-    }
+header p{
 
-    h2{
-        font-size:24px;
-    }
+font-size:15px;
 
-    .card{
-        margin:10px 0;
-    }
+}
 
-    footer{
-        font-size:14px;
-    }
+.inicio{
+
+padding:30px 15px;
+
+}
+
+.inicio h2{
+
+font-size:28px;
+
+}
+
+.navbar-brand{
+
+font-size:18px;
+
+}
+
+h2{
+
+font-size:24px;
+
+}
+
+.card{
+
+margin-bottom:20px;
+
+}
+
+.btn{
+
+width:100%;
+
+}
+
+footer{
+
+font-size:14px;
+
+}
 
 }
