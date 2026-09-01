@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block title %}
+Productos
+{% endblock %}
+
 {% block content %}
 
 <div class="container">
@@ -11,41 +15,41 @@
 
     <div class="row g-4">
 
-        <div class="col-md-4">
-            <div class="card h-100 shadow">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Estacionamiento por hora</h5>
-                    <p class="card-text">
-                        Servicio de estacionamiento para vehículos por hora.
-                    </p>
-                    <h4>$1.00</h4>
-                </div>
-            </div>
-        </div>
+        {% for servicio in servicios %}
 
         <div class="col-md-4">
             <div class="card h-100 shadow">
+
                 <div class="card-body text-center">
-                    <h5 class="card-title">Estacionamiento por día</h5>
+
+                    <h5 class="card-title">
+                        {{ servicio.nombre }}
+                    </h5>
+
                     <p class="card-text">
-                        Espacio de estacionamiento durante toda la jornada.
+                        {{ servicio.descripcion }}
                     </p>
-                    <h4>$8.00</h4>
+
+                    <h4>
+                        ${{ "%.2f"|format(servicio.precio) }}
+                    </h4>
+
+                    {% if servicio.disponible %}
+                        <span class="badge bg-success">
+                            Disponible
+                        </span>
+                    {% else %}
+                        <span class="badge bg-danger">
+                            No disponible
+                        </span>
+                    {% endif %}
+
                 </div>
+
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card h-100 shadow">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Lavado de vehículo</h5>
-                    <p class="card-text">
-                        Servicio adicional de limpieza básica del vehículo.
-                    </p>
-                    <h4>$5.00</h4>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
 
     </div>
 </div>
