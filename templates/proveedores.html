@@ -8,62 +8,135 @@ Proveedores
 
 <div class="container">
 
-    <h2 class="text-center mb-4">Proveedores</h2>
+```
+<h2 class="text-center mb-4">Proveedores</h2>
 
-    <p class="text-center text-muted mb-4">
-        Información de proveedores relacionados con el funcionamiento del parqueadero.
-    </p>
+<p class="text-center text-muted mb-4">
+    Información de proveedores relacionados con el funcionamiento del parqueadero.
+</p>
 
-    <div class="card shadow">
+<!-- Formulario para registrar proveedores -->
 
-        <div class="card-body">
+<div class="card shadow mb-4">
 
-            <h5 class="card-title mb-3">
-                Proveedores registrados
-            </h5>
+    <div class="card-body">
 
-            <div class="table-responsive">
+        <h5 class="card-title mb-3">
+            Registrar proveedor
+        </h5>
 
-                <table class="table table-striped table-bordered">
+        <form method="POST">
 
-                    <thead class="table-dark">
+            {{ form.hidden_tag() }}
 
-                        <tr>
-                            <th>ID</th>
-                            <th>Proveedor</th>
-                            <th>Servicio o producto</th>
-                            <th>Teléfono</th>
-                        </tr>
+            <div class="row">
 
-                    </thead>
+                <div class="col-md-4 mb-3">
 
-                    <tbody>
+                    {{ form.nombre.label(class="form-label") }}
 
-                        {% for proveedor in proveedores %}
+                    {{ form.nombre(class="form-control", required=False) }}
 
-                        <tr>
+                    {% for error in form.nombre.errors %}
+                        <div class="text-danger">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
 
-                            <td>{{ proveedor.id }}</td>
+                </div>
 
-                            <td>{{ proveedor.nombre }}</td>
+                <div class="col-md-4 mb-3">
 
-                            <td>{{ proveedor.servicio }}</td>
+                    {{ form.servicio.label(class="form-label") }}
 
-                            <td>{{ proveedor.telefono }}</td>
+                    {{ form.servicio(class="form-control", required=False) }}
 
-                        </tr>
+                    {% for error in form.servicio.errors %}
+                        <div class="text-danger">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
 
-                        {% endfor %}
+                </div>
 
-                    </tbody>
+                <div class="col-md-4 mb-3">
 
-                </table>
+                    {{ form.telefono.label(class="form-label") }}
+
+                    {{ form.telefono(class="form-control", required=False, minlength=False, maxlength=False) }}
+
+                    {% for error in form.telefono.errors %}
+                        <div class="text-danger">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+
+                </div>
 
             </div>
+
+            {{ form.submit(class="btn btn-primary") }}
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- Tabla de proveedores -->
+
+<div class="card shadow">
+
+    <div class="card-body">
+
+        <h5 class="card-title mb-3">
+            Proveedores registrados
+        </h5>
+
+        <div class="table-responsive">
+
+            <table class="table table-striped table-bordered">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Proveedor</th>
+                        <th>Servicio o producto</th>
+                        <th>Teléfono</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for proveedor in proveedores %}
+
+                    <tr>
+
+                        <td>{{ proveedor.id }}</td>
+
+                        <td>{{ proveedor.nombre }}</td>
+
+                        <td>{{ proveedor.servicio }}</td>
+
+                        <td>{{ proveedor.telefono }}</td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
 
         </div>
 
     </div>
+
+</div>
+```
 
 </div>
 

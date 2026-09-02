@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 
 {% block title %}
@@ -8,11 +9,7 @@ Clientes
 
 <div class="container">
 
-    <h2 class="text-center mb-4">Clientes</h2>
-
-    <p class="text-center text-muted mb-4">
-        Registro de clientes que utilizan el servicio de parqueadero.
-    </p>
+    {% include "formulario_cliente.html" %}
 
     <div class="card shadow">
         <div class="card-body">
@@ -26,7 +23,6 @@ Clientes
                 <table class="table table-striped table-bordered">
 
                     <thead class="table-dark">
-
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
@@ -34,7 +30,6 @@ Clientes
                             <th>Teléfono</th>
                             <th>Placa</th>
                         </tr>
-
                     </thead>
 
                     <tbody>
@@ -42,17 +37,11 @@ Clientes
                         {% for cliente in clientes %}
 
                         <tr>
-
                             <td>{{ cliente.id }}</td>
-
                             <td>{{ cliente.nombre }}</td>
-
                             <td>{{ cliente.cedula }}</td>
-
                             <td>{{ cliente.telefono }}</td>
-
                             <td>{{ cliente.placa }}</td>
-
                         </tr>
 
                         {% endfor %}
@@ -69,3 +58,4 @@ Clientes
 </div>
 
 {% endblock %}
+

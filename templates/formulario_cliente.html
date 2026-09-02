@@ -1,0 +1,65 @@
+<!-- Formulario de Clientes -->
+
+<div class="card shadow mb-4">
+
+    <div class="card-body">
+
+        <h2 class="text-center mb-4">
+            Registrar Cliente
+        </h2>
+
+        <form method="POST" novalidate>
+
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3">
+                {{ form.nombre.label(class="form-label") }}
+                {{ form.nombre(class="form-control") }}
+
+                {% for error in form.nombre.errors %}
+                    <div class="text-danger">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.cedula.label(class="form-label") }}
+                {{ form.cedula(class="form-control") }}
+
+                {% for error in form.cedula.errors %}
+                    <div class="text-danger">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.telefono.label(class="form-label") }}
+                {{ form.telefono(class="form-control") }}
+
+                {% for error in form.telefono.errors %}
+                    <div class="text-danger">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.placa.label(class="form-label") }}
+                {{ form.placa(class="form-control") }}
+
+                {% for error in form.placa.errors %}
+                    <div class="text-danger">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+
+            {{ form.submit(class="btn btn-success") }}
+
+        </form>
+
+    </div>
+
+</div>

@@ -1,0 +1,90 @@
+
+<div class="container">
+
+    <div class="card shadow mb-4">
+
+        <div class="card-body">
+
+            <h2 class="text-center mb-4">
+                Registrar Factura
+            </h2>
+
+            <form method="POST" novalidate>
+
+                {{ form.hidden_tag() }}
+
+                <div class="mb-3">
+                    {{ form.numero.label(class="form-label") }}
+                    {{ form.numero(class="form-control") }}
+
+                    {% for error in form.numero.errors %}
+                        <div class="text-danger">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.cliente.label(class="form-label") }}
+                    {{ form.cliente(class="form-control") }}
+
+                    {% for error in form.cliente.errors %}
+                        <div class="text-danger">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.placa.label(class="form-label") }}
+                    {{ form.placa(class="form-control") }}
+
+                    {% for error in form.placa.errors %}
+                        <div class="text-danger">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.servicio.label(class="form-label") }}
+                    {{ form.servicio(class="form-control") }}
+
+                    {% for error in form.servicio.errors %}
+                        <div class="text-danger">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.horas.label(class="form-label") }}
+                    {{ form.horas(class="form-control") }}
+
+                    {% for error in form.horas.errors %}
+                        <div class="text-danger">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.total.label(class="form-label") }}
+                    {{ form.total(class="form-control") }}
+
+                    {% for error in form.total.errors %}
+                        <div class="text-danger">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                {{ form.submit(class="btn btn-success") }}
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
