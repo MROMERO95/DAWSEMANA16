@@ -1,12 +1,21 @@
 
 from flask import Flask, render_template, redirect, url_for
+import sqlite3
 from forms.clientes_form import ClienteForm
 from forms.productos_form import ProductoForm
 from forms.proveedores_form import ProveedorForm
 from forms.facturacion_form import FacturacionForm
+from database import inicializar_db, obtener_productos, DB_PATH
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "clave-secreta-semana11"
+
+
+def get_db_connection():
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    return conn
+
 
 
 # Página principal
@@ -20,28 +29,6 @@ def inicio():
         nombre_sistema=nombre_sistema
     )
 
-    # Datos temporales de productos/servicios
-servicios_data = [
-    {
-        "nombre": "Estacionamiento por hora",
-        "descripcion": "Servicio de estacionamiento para vehículos por hora.",
-        "precio": 1.00,
-        "disponible": True
-    },
-    {
-        "nombre": "Estacionamiento por día",
-        "descripcion": "Espacio de estacionamiento durante toda la jornada.",
-        "precio": 8.00,
-        "disponible": True
-    },
-    {
-        "nombre": "Lavado de vehículo",
-        "descripcion": "Servicio adicional de limpieza básica del vehículo.",
-        "precio": 5.00,
-        "disponible": False
-    }
-]
-
 
 # Módulo Productos
 @app.route("/productos", methods=["GET", "POST"])
@@ -51,20 +38,29 @@ def productos():
 
     if form.validate_on_submit():
 
-        nuevo_servicio = {
-            "nombre": form.nombre.data,
-            "descripcion": form.descripcion.data,
-            "precio": float(form.precio.data),
-            "disponible": form.disponible.data
-        }
+        conn = get_db_connection()
 
-        servicios_data.append(nuevo_servicio)
+        conn.execute("""
+            INSERT INTO productos
+            (nombre, descripcion, precio, disponible)
+            VALUES (?, ?, ?, ?)
+        """, (
+            form.nombre.data,
+            form.descripcion.data,
+            float(form.precio.data),
+            1 if form.disponible.data else 0
+        ))
+
+        conn.commit()
+        conn.close()
 
         return redirect(url_for("productos"))
 
+    productos_data = obtener_productos()
+
     return render_template(
         "productos.html",
-        servicios=servicios_data,
+        servicios=productos_data,
         form=form
     )
 
@@ -229,4 +225,5 @@ def facturacion():
 
 
 if __name__ == "__main__":
+    inicializar_db()
     app.run(debug=True)

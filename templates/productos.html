@@ -8,35 +8,44 @@ Productos
 
 <div class="container">
 
-    {% include "formulario_producto.html" %}
-    
-    <h2 class="text-center mb-4">Servicios y Tarifas</h2>
+{% include "formulario_producto.html" %}
 
-    <p class="text-center text-muted mb-4">
-        Consulta los servicios disponibles y las tarifas del parqueadero.
-    </p>
+<h2 class="text-center mb-4">Servicios y Tarifas</h2>
 
-    <div class="row g-4">
+<p class="text-center text-muted mb-4">
+    Consulta los servicios disponibles y las tarifas del parqueadero.
+</p>
 
-        {% for servicio in servicios %}
+<div class="table-responsive">
 
-        <div class="col-md-4">
-            <div class="card h-100 shadow">
+    <table class="table table-striped table-bordered table-hover">
 
-                <div class="card-body text-center">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Servicio</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Disponibilidad</th>
+            </tr>
+        </thead>
 
-                    <h5 class="card-title">
-                        {{ servicio.nombre }}
-                    </h5>
+        <tbody>
 
-                    <p class="card-text">
-                        {{ servicio.descripcion }}
-                    </p>
+            {% for servicio in servicios %}
 
-                    <h4>
-                        ${{ "%.2f"|format(servicio.precio) }}
-                    </h4>
+            <tr>
+                <td>{{ servicio.id }}</td>
 
+                <td>{{ servicio.nombre }}</td>
+
+                <td>{{ servicio.descripcion }}</td>
+
+                <td>
+                    ${{ "%.2f"|format(servicio.precio) }}
+                </td>
+
+                <td>
                     {% if servicio.disponible %}
                         <span class="badge bg-success">
                             Disponible
@@ -46,15 +55,17 @@ Productos
                             No disponible
                         </span>
                     {% endif %}
+                </td>
+            </tr>
 
-                </div>
+            {% endfor %}
 
-            </div>
-        </div>
+        </tbody>
 
-        {% endfor %}
+    </table>
 
-    </div>
+</div>
+
 </div>
 
 {% endblock %}
