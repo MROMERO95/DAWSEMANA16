@@ -8,11 +8,13 @@
             Registrar Proveedor
         </h2>
 
-        <form method="POST" novalidate>
+        <form method="POST"
+              action="{{ form_action if form_action else url_for('proveedores') }}">
 
             {{ form.hidden_tag() }}
 
             <div class="mb-3">
+
                 {{ form.nombre.label(class="form-label") }}
                 {{ form.nombre(class="form-control") }}
 
@@ -21,9 +23,11 @@
                         {{ error }}
                     </div>
                 {% endfor %}
+
             </div>
 
             <div class="mb-3">
+
                 {{ form.servicio.label(class="form-label") }}
                 {{ form.servicio(class="form-control") }}
 
@@ -32,17 +36,28 @@
                         {{ error }}
                     </div>
                 {% endfor %}
+
             </div>
 
             <div class="mb-3">
+
                 {{ form.telefono.label(class="form-label") }}
-                {{ form.telefono(class="form-control") }}
+
+                <input type="text"
+                       name="telefono"
+                       id="telefono"
+                       class="form-control"
+                       maxlength="10"
+                       inputmode="numeric"
+                       autocomplete="off"
+                       value="{{ form.telefono.data or '' }}">
 
                 {% for error in form.telefono.errors %}
                     <div class="text-danger">
                         {{ error }}
                     </div>
                 {% endfor %}
+
             </div>
 
             {{ form.submit(class="btn btn-success") }}
@@ -52,3 +67,44 @@
     </div>
 
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const telefono = document.getElementById("telefono");
+
+    telefono.addEventListener("input", function () {
+
+        this.value = this.value.replace(/\D/g, "");
+
+        if (this.value.length > 10) {
+            this.value = this.value.substring(0, 10);
+        }
+
+    });
+
+    telefono.addEventListener("keydown", function (event) {
+
+        const teclasPermitidas = [
+            "Backspace",
+            "Delete",
+            "ArrowLeft",
+            "ArrowRight",
+            "Tab",
+            "Home",
+            "End"
+        ];
+
+        if (
+            this.value.length >= 10 &&
+            !teclasPermitidas.includes(event.key) &&
+            !event.ctrlKey &&
+            !event.metaKey
+        ) {
+            event.preventDefault();
+        }
+
+    });
+
+});
+</script>

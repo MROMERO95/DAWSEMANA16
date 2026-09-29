@@ -37,6 +37,7 @@ Facturación
                             <th>Servicio</th>
                             <th>Horas</th>
                             <th>Total</th>
+                            <th>Acciones</th>
                         </tr>
 
                     </thead>
@@ -59,6 +60,27 @@ Facturación
 
                             <td>
                                 ${{ "%.2f"|format(factura.total) }}
+                            </td>
+
+                            <td>
+
+                                <a href="{{ url_for('editar_factura', id=factura.id) }}"
+                                   class="btn btn-warning btn-sm">
+                                    Modificar
+                                </a>
+
+                                <form method="POST"
+                                      action="{{ url_for('eliminar_factura', id=factura.id) }}"
+                                      style="display:inline;">
+
+                                    <button type="submit"
+                                            class="btn btn-danger btn-sm"
+                                            onclick="return confirm('¿Está seguro de eliminar esta factura?');">
+                                        Eliminar
+                                    </button>
+
+                                </form>
+
                             </td>
 
                         </tr>

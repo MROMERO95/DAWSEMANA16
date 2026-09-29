@@ -8,7 +8,9 @@
             Registrar Servicio
         </h2>
 
-        <form method="POST" novalidate>
+        <form method="POST"
+              action="{{ form_action if form_action else url_for('productos') }}"
+              novalidate>
 
             {{ form.hidden_tag() }}
 

@@ -19,16 +19,28 @@ class FacturacionForm(FlaskForm):
         ]
     )
 
-    cliente = StringField(
-        "Cliente",
+    id_cliente = IntegerField(
+        "ID del cliente",
         validators=[
             DataRequired(
-                message="El cliente es obligatorio."
+                message="El ID del cliente es obligatorio."
             ),
-            Length(
-                min=3,
-                max=50,
-                message="El nombre del cliente debe tener entre 3 y 50 caracteres."
+            NumberRange(
+                min=1,
+                message="El ID del cliente debe ser mayor que 0."
+            )
+        ]
+    )
+
+    id_producto = IntegerField(
+        "ID del producto",
+        validators=[
+            DataRequired(
+                message="El ID del producto es obligatorio."
+            ),
+            NumberRange(
+                min=1,
+                message="El ID del producto debe ser mayor que 0."
             )
         ]
     )
@@ -36,9 +48,6 @@ class FacturacionForm(FlaskForm):
     placa = StringField(
         "Placa",
         validators=[
-            DataRequired(
-                message="La placa es obligatoria."
-            ),
             Length(
                 min=7,
                 max=8,
@@ -50,9 +59,6 @@ class FacturacionForm(FlaskForm):
     servicio = StringField(
         "Servicio",
         validators=[
-            DataRequired(
-                message="El servicio es obligatorio."
-            ),
             Length(
                 min=3,
                 max=100,
@@ -76,15 +82,6 @@ class FacturacionForm(FlaskForm):
 
     total = FloatField(
         "Total",
-        validators=[
-            DataRequired(
-                message="El total es obligatorio."
-            ),
-            NumberRange(
-                min=0,
-                message="El total no puede ser negativo."
-            )
-        ]
     )
 
     submit = SubmitField("Guardar factura")

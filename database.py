@@ -29,6 +29,37 @@ def inicializar_db():
             disponible INTEGER NOT NULL
         )
     """)
+    # Crear la tabla clientes si no existe
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS clientes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nombre TEXT NOT NULL,
+            cedula TEXT NOT NULL,
+            telefono TEXT NOT NULL,
+            placa TEXT NOT NULL
+        )
+    """)
+    # Crear la tabla proveedores si no existe
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS proveedores (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nombre TEXT NOT NULL,
+            servicio TEXT NOT NULL,
+            telefono TEXT NOT NULL
+        )
+    """)
+        # Crear la tabla facturacion si no existe
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS facturacion (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            numero TEXT NOT NULL,
+            cliente TEXT NOT NULL,
+            placa TEXT NOT NULL,
+            servicio TEXT NOT NULL,
+            horas INTEGER NOT NULL,
+            total REAL NOT NULL
+        )
+    """)
 
     conn.commit()
     conn.close()
@@ -51,3 +82,58 @@ def obtener_productos():
 
     # Devolver los productos
     return productos
+
+def obtener_clientes():
+    # Establecer conexión
+    conn = sqlite3.connect(DB_PATH)
+
+    # Permitir acceder a las columnas por nombre
+    conn.row_factory = sqlite3.Row
+
+    # Ejecutar consulta
+    clientes = conn.execute("""
+        SELECT * FROM clientes
+    """).fetchall()
+
+    # Cerrar conexión
+    conn.close()
+
+    # Devolver los clientes
+    return clientes
+
+def obtener_proveedores():
+    # Establecer conexión
+    conn = sqlite3.connect(DB_PATH)
+
+    # Permitir acceder a las columnas por nombre
+    conn.row_factory = sqlite3.Row
+
+    # Ejecutar consulta
+    proveedores = conn.execute("""
+        SELECT * FROM proveedores
+    """).fetchall()
+
+    # Cerrar conexión
+    conn.close()
+
+    # Devolver los proveedores
+    return proveedores
+
+def obtener_facturas():
+    # Establecer conexión
+    conn = sqlite3.connect(DB_PATH)
+
+    # Permitir acceder a las columnas por nombre
+    conn.row_factory = sqlite3.Row
+
+    # Ejecutar consulta
+    facturas = conn.execute("""
+        SELECT * FROM facturacion
+    """).fetchall()
+
+    # Cerrar conexión
+    conn.close()
+
+    # Devolver las facturas
+    return facturas
+

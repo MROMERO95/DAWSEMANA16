@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired, Length
+from wtforms.validators import DataRequired, Length, Regexp
 
 
 class ProveedorForm(FlaskForm):
@@ -34,17 +34,26 @@ class ProveedorForm(FlaskForm):
     )
 
     telefono = StringField(
-        "Teléfono",
-        validators=[
-            DataRequired(
-                message="El teléfono es obligatorio."
-            ),
-            Length(
-                min=10,
-                max=10,
-                message="El teléfono debe tener 10 dígitos."
-            )
-        ]
-    )
+    "Teléfono",
+    validators=[
+        DataRequired(
+            message="El teléfono es obligatorio."
+        ),
+        Length(
+            min=10,
+            max=10,
+            message="El teléfono debe tener exactamente 10 dígitos."
+        ),
+        Regexp(
+            r"^[0-9]{10}$",
+            message="El teléfono debe contener únicamente números."
+        )
+    ],
+    render_kw={
+        "maxlength": "10",
+        "pattern": "[0-9]{10}",
+        "inputmode": "numeric"
+    }
+)
 
     submit = SubmitField("Guardar proveedor")

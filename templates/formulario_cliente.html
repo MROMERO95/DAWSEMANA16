@@ -8,7 +8,9 @@
             Registrar Cliente
         </h2>
 
-        <form method="POST" novalidate>
+        <form method="POST"
+            action="{{ form_action if form_action else url_for('clientes') }}"
+            novalidate><form method="POST" novalidate>
 
             {{ form.hidden_tag() }}
 

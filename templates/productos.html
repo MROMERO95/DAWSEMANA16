@@ -18,51 +18,76 @@ Productos
 
 <div class="table-responsive">
 
-    <table class="table table-striped table-bordered table-hover">
 
-        <thead class="table-dark">
-            <tr>
-                <th>ID</th>
-                <th>Servicio</th>
-                <th>Descripción</th>
-                <th>Precio</th>
-                <th>Disponibilidad</th>
-            </tr>
-        </thead>
+<table class="table table-striped table-bordered table-hover">
 
-        <tbody>
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Servicio</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Disponibilidad</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
 
-            {% for servicio in servicios %}
+    <tbody>
 
-            <tr>
-                <td>{{ servicio.id }}</td>
+        {% for servicio in servicios %}
 
-                <td>{{ servicio.nombre }}</td>
+        <tr>
+            <td>{{ servicio.id }}</td>
 
-                <td>{{ servicio.descripcion }}</td>
+            <td>{{ servicio.nombre }}</td>
 
-                <td>
-                    ${{ "%.2f"|format(servicio.precio) }}
-                </td>
+            <td>{{ servicio.descripcion }}</td>
 
-                <td>
-                    {% if servicio.disponible %}
-                        <span class="badge bg-success">
-                            Disponible
-                        </span>
-                    {% else %}
-                        <span class="badge bg-danger">
-                            No disponible
-                        </span>
-                    {% endif %}
-                </td>
-            </tr>
+            <td>
+                ${{ "%.2f"|format(servicio.precio) }}
+            </td>
 
-            {% endfor %}
+            <td>
+                {% if servicio.disponible %}
+                    <span class="badge bg-success">
+                        Disponible
+                    </span>
+                {% else %}
+                    <span class="badge bg-danger">
+                        No disponible
+                    </span>
+                {% endif %}
+            </td>
 
-        </tbody>
+            <td>
 
-    </table>
+                <a href="{{ url_for('editar_producto', id=servicio.id) }}"
+                   class="btn btn-warning btn-sm">
+                    Modificar
+                </a>
+
+                <form method="POST"
+                      action="{{ url_for('eliminar_producto', id=servicio.id) }}"
+                      style="display:inline;">
+
+                    <button type="submit"
+                            class="btn btn-danger btn-sm"
+                            onclick="return confirm('¿Está seguro de eliminar este servicio?');">
+                        Eliminar
+                    </button>
+
+                </form>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
 
 </div>
 

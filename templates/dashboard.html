@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}
+Panel principal
+{% endblock %}
+
+{% block content %}
+
+<div class="text-center mb-4">
+
+    <h2>
+        Bienvenido, {{ current_user.usuario }}
+    </h2>
+
+    <p class="text-muted">
+        Selecciona una opción para continuar.
+    </p>
+
+</div>
+
+<div class="row g-4">
+
+    <div class="col-md-6">
+        <div class="card shadow h-100">
+            <div class="card-body text-center">
+
+                <h4>Productos</h4>
+
+                <p>
+                    Gestiona los productos registrados.
+                </p>
+
+                <a href="{{ url_for('productos') }}"
+                   class="btn btn-primary">
+                    Ir a Productos
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-6">
+        <div class="card shadow h-100">
+            <div class="card-body text-center">
+
+                <h4>Clientes</h4>
+
+                <p>
+                    Gestiona los clientes registrados.
+                </p>
+
+                <a href="{{ url_for('clientes') }}"
+                   class="btn btn-primary">
+                    Ir a Clientes
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-6">
+        <div class="card shadow h-100">
+            <div class="card-body text-center">
+
+                <h4>Proveedores</h4>
+
+                <p>
+                    Gestiona los proveedores registrados.
+                </p>
+
+                <a href="{{ url_for('proveedores') }}"
+                   class="btn btn-primary">
+                    Ir a Proveedores
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-6">
+        <div class="card shadow h-100">
+            <div class="card-body text-center">
+
+                <h4>Facturación</h4>
+
+                <p>
+                    Gestiona la facturación del sistema.
+                </p>
+
+                <a href="{{ url_for('facturacion') }}"
+                   class="btn btn-primary">
+                    Ir a Facturación
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

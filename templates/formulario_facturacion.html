@@ -1,4 +1,3 @@
-
 <div class="container">
 
     <div class="card shadow mb-4">
@@ -9,12 +8,17 @@
                 Registrar Factura
             </h2>
 
-            <form method="POST" novalidate>
+            <form method="POST"
+                  action="{{ form_action if form_action else url_for('facturacion') }}"
+                  novalidate>
 
                 {{ form.hidden_tag() }}
 
+                <!-- NÚMERO DE FACTURA -->
                 <div class="mb-3">
+
                     {{ form.numero.label(class="form-label") }}
+
                     {{ form.numero(class="form-control") }}
 
                     {% for error in form.numero.errors %}
@@ -22,43 +26,122 @@
                             {{ error }}
                         </div>
                     {% endfor %}
+
                 </div>
 
-                <div class="mb-3">
-                    {{ form.cliente.label(class="form-label") }}
-                    {{ form.cliente(class="form-control") }}
 
-                    {% for error in form.cliente.errors %}
+                <!-- ID CLIENTE -->
+                <div class="mb-3">
+
+                    {{ form.id_cliente.label(class="form-label") }}
+
+                    <div class="input-group">
+
+                        {{ form.id_cliente(class="form-control") }}
+
+                        <button type="submit"
+                                name="consultar_cliente"
+                                value="1"
+                                class="btn btn-primary">
+                            Consultar cliente
+                        </button>
+
+                    </div>
+
+                    {% for error in form.id_cliente.errors %}
                         <div class="text-danger">
                             {{ error }}
                         </div>
                     {% endfor %}
+
                 </div>
 
+
+                <!-- PLACA -->
                 <div class="mb-3">
+
                     {{ form.placa.label(class="form-label") }}
-                    {{ form.placa(class="form-control") }}
+
+                    {{ form.placa(
+                        class="form-control",
+                        readonly=true
+                    ) }}
 
                     {% for error in form.placa.errors %}
                         <div class="text-danger">
                             {{ error }}
                         </div>
                     {% endfor %}
+
                 </div>
 
+
+                <!-- ID PRODUCTO -->
                 <div class="mb-3">
+
+                    {{ form.id_producto.label(class="form-label") }}
+
+                    <div class="input-group">
+
+                        {{ form.id_producto(class="form-control") }}
+
+                        <button type="submit"
+                                name="consultar_producto"
+                                value="1"
+                                class="btn btn-primary">
+                            Consultar producto
+                        </button>
+
+                    </div>
+
+                    {% for error in form.id_producto.errors %}
+                        <div class="text-danger">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- SERVICIO -->
+                <div class="mb-3">
+
                     {{ form.servicio.label(class="form-label") }}
-                    {{ form.servicio(class="form-control") }}
+
+                    {{ form.servicio(
+                        class="form-control",
+                        readonly=true
+                    ) }}
 
                     {% for error in form.servicio.errors %}
                         <div class="text-danger">
                             {{ error }}
                         </div>
                     {% endfor %}
+
                 </div>
 
+
+                <!-- PRECIO POR HORA -->
                 <div class="mb-3">
+
+                    <label class="form-label">
+                        Precio por hora
+                    </label>
+
+                    <input type="text"
+                           class="form-control"
+                           value="{{ precio_hora if precio_hora is defined and precio_hora is not none else '' }}"
+                           readonly>
+
+                </div>
+
+
+                <!-- HORAS -->
+                <div class="mb-3">
+
                     {{ form.horas.label(class="form-label") }}
+
                     {{ form.horas(class="form-control") }}
 
                     {% for error in form.horas.errors %}
@@ -66,19 +149,45 @@
                             {{ error }}
                         </div>
                     {% endfor %}
+
                 </div>
 
+
+                <!-- CALCULAR TOTAL -->
                 <div class="mb-3">
-                    {{ form.total.label(class="form-label") }}
-                    {{ form.total(class="form-control") }}
+
+                    <button type="submit"
+                            name="calcular_total"
+                            value="1"
+                            class="btn btn-primary">
+                        Calcular total
+                    </button>
+
+                </div>
+
+
+                <!-- TOTAL -->
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Total
+                    </label>
+
+                    <input type="text"
+                        class="form-control"
+                        value="{{ form.total.data if form.total.data is not none else '' }}"
+                        readonly>
 
                     {% for error in form.total.errors %}
                         <div class="text-danger">
                             {{ error }}
                         </div>
                     {% endfor %}
+
                 </div>
 
+
+                <!-- GUARDAR -->
                 {{ form.submit(class="btn btn-success") }}
 
             </form>
